@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                {% if profile_user.profile.avatar %}
+                    <img src="{{ profile_user.profile.avatar.url }}" alt="Avatar" class="rounded-circle mb-3" width="150" height="150" style="object-fit: cover;">
+                {% else %}
+                    <div class="bg-secondary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 150px; height: 150px; font-size: 3rem;">
+                        {{ profile_user.username|make_list|first|upper }}
+                    </div>
+                {% endif %}
+                <h2>{{ profile_user.username }}</h2>
+                <p class="text-muted">{{ profile_user.email }}</p>
+                
+                <ul class="list-group list-group-flush text-start mt-4">
+                    <li class="list-group-item"><strong>Location:</strong> {{ profile_user.profile.location|default:"Not specified" }}</li>
+                    <li class="list-group-item"><strong>Birth Date:</strong> {{ profile_user.profile.birth_date|default:"Not specified" }}</li>
+                    <li class="list-group-item"><strong>Bio:</strong> {{ profile_user.profile.bio|default:"No bio available." }}</li>
+                </ul>
+
+                {% if request.user == profile_user %}
+                    <div class="mt-4">
+                        <a href="{% url 'edit_profile_view' %}" class="btn btn-outline-primary">Edit Profile</a>
+                        <a href="{% url 'change_password_view' %}" class="btn btn-outline-warning">Change Password</a>
+                        <a href="{% url 'delete_account_view' %}" class="btn btn-outline-danger ms-2">Delete Account</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

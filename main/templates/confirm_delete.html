@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+        <div class="alert alert-danger shadow-sm">
+            <h4 class="alert-heading">Are you absolutely sure?</h4>
+            <p>This action cannot be undone. All your data will be permanently lost.</p>
+            <hr>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, Delete My Account</button>
+                <a href="{% url 'profile_view' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
