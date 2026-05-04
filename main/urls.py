@@ -3,6 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
+
 urlpatterns = [
     path('register/', views.register_view, name='register_view'),
     path('profile/', views.profile_view, name='profile_view'),

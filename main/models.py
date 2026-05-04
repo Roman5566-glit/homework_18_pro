@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 class UserProfile(models.Model):
     """Model representing a user's profile, linked One-to-One with the default User model"""
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -15,13 +16,11 @@ class UserProfile(models.Model):
         """Returns the string representation of the user profile"""
         return f"{self.user.username}'s Profile"
 
-
 @receiver(post_save, sender=User)
 def create_user_profile(sender: type, instance: User, created: bool, **kwargs) -> None:
     """Creates a UserProfile automatically when a new User is created"""
     if created:
         UserProfile.objects.create(user=instance)
-
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender: type, instance: User, **kwargs) -> None:

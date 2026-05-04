@@ -28,7 +28,6 @@ def register_view(request: HttpRequest) -> HttpResponse:
         form = RegistrationForm()
     return render(request, 'register.html', {'form': form})
 
-
 @login_required
 def profile_view(request: HttpRequest, username: str = None) -> HttpResponse:
     """Displays the user profile. Shows the current user's profile if username is None"""
@@ -37,7 +36,6 @@ def profile_view(request: HttpRequest, username: str = None) -> HttpResponse:
     else:
         user = request.user
     return render(request, 'profile.html', {'profile_user': user})
-
 
 @login_required
 def edit_profile_view(request: HttpRequest) -> HttpResponse:
@@ -53,7 +51,6 @@ def edit_profile_view(request: HttpRequest) -> HttpResponse:
     else:
         form = UserProfileForm(instance=request.user.profile)
     return render(request, 'edit_profile.html', {'form': form})
-
 
 @login_required
 def change_password_view(request: HttpRequest) -> HttpResponse:
@@ -71,7 +68,6 @@ def change_password_view(request: HttpRequest) -> HttpResponse:
     else:
         form = PasswordChangeForm(user=request.user)
     return render(request, 'change_password.html', {'form': form})
-
 
 @login_required
 def delete_account_view(request: HttpRequest) -> HttpResponse:
